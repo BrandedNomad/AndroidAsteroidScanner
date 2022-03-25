@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="MainTitle">
+    <style name="mainTitle">
         <item name="android:padding">16dp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
         <item name="android:typeface">monospace</item>
         <item name="android:textSize">20sp</item>
         <item name="android:background">#55010613</item>/>
+    </style>
+
+    <style name="mainListItem">
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:background">@android:color/black</item>
+    </style>
+
+    <style name="mainListItemName">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="mainListItemDate">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
     </style>
 </resources>
 
