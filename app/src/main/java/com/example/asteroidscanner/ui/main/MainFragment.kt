@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asteroidscanner.R
@@ -30,35 +32,20 @@ class MainFragment:Fragment() {
         //Set as lifecycleOwner
         binding.lifecycleOwner = this
 
-        //SetAdapter
-        var dummyData = arrayListOf(
-            "Big Asteroid",
-            "Bigger Asteroid",
-            "Biggesterest Asteroid",
-            "Big Asteroid",
-            "Bigger Asteroid",
-            "Biggesterest Asteroid",
-            "Big Asteroid",
-            "Bigger Asteroid",
-            "Biggesterest Asteroid",
-            "Big Asteroid",
-            "Bigger Asteroid",
-            "Biggesterest Asteroid",
-            "Big Asteroid",
-            "Bigger Asteroid",
-            "Biggesterest Asteroid",
-            "Big Asteroid",
-            "Bigger Asteroid",
-            "Biggesterest Asteroid",
-            "Big Asteroid",
-            "Bigger Asteroid",
-            "Biggesterest Asteroid",
-        )
+        //Get the ViewModel
+        var viewModelFactory = MainViewModelFactory()
+        var viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
 
-        var adapter = MainAdapter(dummyData)
-        var recyclerView: RecyclerView = binding.mainRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = adapter
+
+
+        //Observers
+        viewModel.listItems.observe(viewLifecycleOwner, Observer{
+            //SetAdapter
+            var adapter = MainAdapter(it)
+            var recyclerView: RecyclerView = binding.mainRecyclerView
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = adapter
+        })
 
 
         return binding.root

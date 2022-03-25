@@ -1,0 +1,25 @@
+package com.example.asteroidscanner.ui.main
+
+var dummyData = arrayListOf(
+    "Big Asteroid",
+    "Bigger Asteroid",
+    "Biggesterest Asteroid",
+    "Big Asteroid",
+    "Bigger Asteroid",
+    "Biggesterest Asteroid",
+    "Big Asteroid",
+    "Bigger Asteroid",
+    "Biggesterest Asteroid",
+    "Big Asteroid",
+    "Bigger Asteroid",
+    "Biggesterest Asteroid",
+    "Big Asteroid",
+    "Bigger Asteroid",
+    "Biggesterest Asteroid",
+    "Big Asteroid",
+    "Bigger Asteroid",
+    "Biggesterest Asteroid",
+    "Big Asteroid",
+    "Bigger Asteroid",
+    "Biggesterest Asteroid",
+)
