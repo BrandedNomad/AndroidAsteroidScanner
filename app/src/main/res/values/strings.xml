@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AsteroidScanner</string>
+    <string name="imageOfTheDayTitle">Image Of The Day</string>
 </resources>
