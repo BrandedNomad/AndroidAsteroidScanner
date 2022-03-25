@@ -36,15 +36,19 @@ class MainFragment:Fragment() {
         var viewModelFactory = MainViewModelFactory()
         var viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
 
+        var adapter = MainAdapter()
+        var recyclerView: RecyclerView = binding.mainRecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = adapter
 
 
         //Observers
         viewModel.listItems.observe(viewLifecycleOwner, Observer{
             //SetAdapter
-            var adapter = MainAdapter(it)
-            var recyclerView: RecyclerView = binding.mainRecyclerView
-            recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = adapter
+            it?.let{
+                adapter.submitList(it)
+            }
+
         })
 
 

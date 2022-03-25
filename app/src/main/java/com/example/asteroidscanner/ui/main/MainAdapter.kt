@@ -5,14 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asteroidscanner.R
+import com.example.asteroidscanner.models.Asteroid
+import com.example.asteroidscanner.models.AsteroidStatus
 
-class MainAdapter(
-    var asteroidList:ArrayList<String>?
-): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+class MainAdapter: ListAdapter<Asteroid, MainAdapter.MainViewHolder>(AsteroidDiffCallback()) {
 
     //Create the viewHolder class
     class MainViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
@@ -22,12 +25,19 @@ class MainAdapter(
 
         fun bind(
             holder:MainViewHolder,
-            item: String?,
+            item: Asteroid?,
         ){
-            holder.textViewName.text = item
-            holder.textViewDate.text = item
-            //holder.imageViewIcon.setImageURI(item)
-
+            holder.textViewName.text = item?.name
+            holder.textViewDate.text = item?.date
+            holder.imageViewIcon.setImageResource(
+                when(item?.status){
+                    AsteroidStatus.NORMAL -> R.drawable.ic_status_normal
+                    AsteroidStatus.POTENTIALY_HAZARDOUS-> R.drawable.ic_status_potentially_hazardous
+                    else -> {
+                        R.drawable.ic_status_normal
+                    }
+                }
+            )
         }
 
         companion object {
@@ -52,24 +62,26 @@ class MainAdapter(
     //Binds data to the viewholder
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
 
-        var item = asteroidList?.get(position)
+        //var item = asteroidList?.get(position)
+        var item = getItem(position)
         holder.bind(holder,item)
 
     }
 
     //tells the adapter the size of the data
-    override fun getItemCount(): Int {
-        return asteroidList?.size!!
-    }
+//    override fun getItemCount(): Int {
+//        return asteroidList?.size!!
+//    }
 }
 
-class AsteroidDiffCallback: DiffUtil.ItemCallback<String>(){
-    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-        TODO("Not yet implemented")
+class AsteroidDiffCallback: DiffUtil.ItemCallback<Asteroid>(){
+
+    override fun areItemsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {
+        return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-        TODO("Not yet implemented")
+    override fun areContentsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {
+        return oldItem ==newItem
     }
 
 }
