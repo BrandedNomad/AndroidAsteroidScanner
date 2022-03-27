@@ -1,6 +1,5 @@
 package com.example.asteroidscanner.ui.main
 
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,8 @@ import androidx.recyclerview.widget.ListAdapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asteroidscanner.R
-import com.example.asteroidscanner.models.Asteroid
-import com.example.asteroidscanner.models.AsteroidStatus
+import com.example.asteroidscanner.domain.Asteroid
+import com.example.asteroidscanner.domain.AsteroidStatus
 
 class MainAdapter: ListAdapter<Asteroid, MainAdapter.MainViewHolder>(AsteroidDiffCallback()) {
 

@@ -3,7 +3,7 @@ package com.example.asteroidscanner.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.asteroidscanner.models.Asteroid
+import com.example.asteroidscanner.domain.Asteroid
 
 class MainViewModel: ViewModel() {
 

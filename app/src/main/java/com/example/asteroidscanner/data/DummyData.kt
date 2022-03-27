@@ -1,7 +1,7 @@
 package com.example.asteroidscanner.ui.main
 
-import com.example.asteroidscanner.models.Asteroid
-import com.example.asteroidscanner.models.AsteroidStatus
+import com.example.asteroidscanner.domain.Asteroid
+import com.example.asteroidscanner.domain.AsteroidStatus
 
 val one = Asteroid("Big Asteroid", "22/01/2022",AsteroidStatus.NORMAL)
 val two = Asteroid("Big Asteroid", "22/01/2022",AsteroidStatus.POTENTIALY_HAZARDOUS)
