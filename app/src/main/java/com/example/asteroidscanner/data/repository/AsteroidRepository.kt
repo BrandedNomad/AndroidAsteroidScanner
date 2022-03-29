@@ -31,12 +31,11 @@ class AsteroidRepository(private val database:AsteroidDatabase){
 
     //TODO: Add date variables to replace hardcoded dates
     suspend fun refreshAsteroids(){
-        lateinit var responseContainer:NetworkAsteroidContainer
+
         withContext(Dispatchers.IO){
             val response = Network.asteroidsAPI.getAsteroidList("2022-03-27","2022-03-27", Constants.API_KEY).await()
             //TODO: Defensive block
-            responseContainer = NetworkAsteroidContainer(listOf(response))
-            database.asteroidDao.insertAll(*responseContainer.asDataBaseModel())
+            database.asteroidDao.insertAll(*response.asDataBaseModel())
 
         }
     }
