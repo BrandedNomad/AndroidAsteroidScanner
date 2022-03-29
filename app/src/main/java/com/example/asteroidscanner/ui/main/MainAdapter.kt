@@ -30,8 +30,8 @@ class MainAdapter: ListAdapter<Asteroid, MainAdapter.MainViewHolder>(AsteroidDif
             holder.textViewDate.text = item?.date
             holder.imageViewIcon.setImageResource(
                 when(item?.status){
-                    AsteroidStatus.NORMAL -> R.drawable.ic_status_normal
-                    AsteroidStatus.POTENTIALY_HAZARDOUS-> R.drawable.ic_status_potentially_hazardous
+                    false -> R.drawable.ic_status_normal
+                    true -> R.drawable.ic_status_potentially_hazardous
                     else -> {
                         R.drawable.ic_status_normal
                     }

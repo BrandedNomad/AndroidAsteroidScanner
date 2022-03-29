@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs'
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -60,8 +61,9 @@ dependencies {
 
     //Room and Lifecycle
     implementation "androidx.room:room-runtime:2.4.2"
-    //kapt "androidx.room:room-compiler:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    kapt "androidx.lifecycle:lifecycle-compiler:2.5.0-alpha04"
 
     // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:2.4.2"
@@ -76,11 +78,13 @@ dependencies {
 
     //Retrofit for API requests
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     //scalars not needed due to the use of moshi
     //implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
 
     //Moshi for JSON parsing
-    implementation "com.squareup.moshi:moshi:1.13.0"
+    //implementation "com.squareup.moshi:moshi:1.13.0"
     implementation "com.squareup.moshi:moshi-kotlin:1.13.0"
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
 

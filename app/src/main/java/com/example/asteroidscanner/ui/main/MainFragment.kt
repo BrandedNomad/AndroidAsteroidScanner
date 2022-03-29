@@ -1,11 +1,14 @@
 package com.example.asteroidscanner.ui.main
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,11 +18,14 @@ import com.example.asteroidscanner.databinding.FragmentMainBinding
 
 class MainFragment:Fragment() {
 
+    lateinit var activityReference: MainFragment
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activityReference = this
 
         //Bind and inflate the fragment
         val binding: FragmentMainBinding = DataBindingUtil.inflate(
@@ -32,10 +38,13 @@ class MainFragment:Fragment() {
         //Set as lifecycleOwner
         binding.lifecycleOwner = this
 
+        val activity = requireNotNull(this.activity)
+
         //Get the ViewModel
-        var viewModelFactory = MainViewModelFactory()
+        var viewModelFactory = MainViewModelFactory(activity.application)
         var viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
 
+        //setup adapter
         var adapter = MainAdapter()
         var recyclerView: RecyclerView = binding.mainRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -43,7 +52,8 @@ class MainFragment:Fragment() {
 
 
         //Observers
-        viewModel.listItems.observe(viewLifecycleOwner, Observer{
+        //Populates the initial
+        viewModel.asteroidList.observe(viewLifecycleOwner, Observer{
             //SetAdapter
             it?.let{
                 adapter.submitList(it)

@@ -12,10 +12,11 @@ data class DatabaseAsteroid constructor(
     @PrimaryKey
     val id:String,
     val name:String,
-    val absolute_magnitude:Float,
+    val date:String,
+    val absolute_magnitude:Double,
     val close_approach_date: String,
     val relative_velocity: String,
-    val estimated_diameter: Float,
+    val estimated_diameter: Double,
     val distance_from_earth: String,
     val status: Boolean
 )
@@ -26,6 +27,7 @@ fun List<DatabaseAsteroid>.asDomainModel():List<Asteroid>{
         Asteroid(
             id = it.id,
             name = it.name,
+            date = it.date,
             absolute_magnitude = it.absolute_magnitude,
             close_approach_date = it.close_approach_date,
             relative_velocity = it.relative_velocity,
