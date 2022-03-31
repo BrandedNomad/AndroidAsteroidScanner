@@ -2,13 +2,6 @@ package com.example.asteroidscanner.domain
 
 
 
-enum class AsteroidStatus{
-    NORMAL,
-    POTENTIALY_HAZARDOUS
-}
-
-
-
 data class Asteroid(
     val id:String,
     val name:String,

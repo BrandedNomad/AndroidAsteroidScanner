@@ -29,12 +29,20 @@ class AsteroidRepository(private val database:AsteroidDatabase){
         it.asDomainModel()
     }
 
+    suspend fun getDailyImage(){
+        withContext(Dispatchers.IO){
+            val response = Network.imageOfTheDayAPI.getImageOfTheDay(Constants.API_KEY).await()
+
+        }
+    }
+
     //TODO: Add date variables to replace hardcoded dates
-    suspend fun refreshAsteroids(){
+    suspend fun refreshAsteroids(currentDate:String){
 
         withContext(Dispatchers.IO){
-            val response = Network.asteroidsAPI.getAsteroidList("2022-03-27","2022-03-27", Constants.API_KEY).await()
+            val response = Network.asteroidsAPI.getAsteroidList(currentDate,currentDate, Constants.API_KEY).await()
             //TODO: Defensive block
+
             database.asteroidDao.insertAll(*response.asDataBaseModel())
 
         }

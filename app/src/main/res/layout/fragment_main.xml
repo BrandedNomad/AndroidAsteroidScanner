@@ -22,7 +22,13 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
+                android:visibility="gone"
                 app:srcCompat="@drawable/placeholder_picture_of_day"/>
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"/>
             <TextView
                 android:id="@+id/imageOfTheDayTitle"
                 android:layout_width="match_parent"
@@ -37,7 +43,6 @@
             android:id="@+id/mainRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

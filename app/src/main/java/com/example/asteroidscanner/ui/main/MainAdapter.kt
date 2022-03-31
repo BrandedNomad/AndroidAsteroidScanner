@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asteroidscanner.R
 import com.example.asteroidscanner.domain.Asteroid
-import com.example.asteroidscanner.domain.AsteroidStatus
 
-class MainAdapter: ListAdapter<Asteroid, MainAdapter.MainViewHolder>(AsteroidDiffCallback()) {
+
+class MainAdapter(val onClickListener: OnClickListener): ListAdapter<Asteroid, MainAdapter.MainViewHolder>(AsteroidDiffCallback()) {
 
     //Create the viewHolder class
     class MainViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
@@ -64,13 +64,21 @@ class MainAdapter: ListAdapter<Asteroid, MainAdapter.MainViewHolder>(AsteroidDif
         //var item = asteroidList?.get(position)
         var item = getItem(position)
         holder.bind(holder,item)
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(item)
+        }
 
     }
 
-    //tells the adapter the size of the data
-//    override fun getItemCount(): Int {
-//        return asteroidList?.size!!
-//    }
+    /**
+     * Custom listener that handles clicks on [RecyclerView] items.  Passes the [Asteroid]
+     * associated with the current item to the [onClick] function.
+     * @param clickListener lambda that will be called with the current [Asteroid]
+     */
+    class OnClickListener(val clickListener: (asteroid:Asteroid) -> Unit){
+        fun onClick(asteroid:Asteroid) = clickListener(asteroid)
+    }
+
 }
 
 class AsteroidDiffCallback: DiffUtil.ItemCallback<Asteroid>(){

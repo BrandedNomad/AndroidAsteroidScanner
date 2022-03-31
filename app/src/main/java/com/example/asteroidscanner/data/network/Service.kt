@@ -1,6 +1,8 @@
 package com.example.asteroidscanner.data.network
 
 
+import com.example.asteroidscanner.data.network.interfaces.AsteroidService
+import com.example.asteroidscanner.data.network.interfaces.ImageService
 import com.example.asteroidscanner.shared.Constants
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -11,16 +13,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-//Interface used for JSON conversion
-interface AsteroidService {
 
-    @GET("neo/rest/v1/feed")
-    fun getAsteroidList(
-        @Query("start_date") startDate: String,
-        @Query("end_date") endDate: String,
-        @Query("api_key") apiKey: String
-    ): Call<GetAsteroidResponse>
-}
+
+
 
 
 //MOSHI used to convert JSON to response object
@@ -39,4 +34,5 @@ private val retrofit = Retrofit.Builder()
 //NETWORK object that will be used to make API calls
 object Network {
     val asteroidsAPI: AsteroidService = retrofit.create(AsteroidService::class.java)
+    val imageOfTheDayAPI: ImageService = retrofit.create(ImageService::class.java)
 }

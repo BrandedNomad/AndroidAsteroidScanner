@@ -5,8 +5,12 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.asteroidscanner.domain.Asteroid
+import com.example.asteroidscanner.domain.DailyImage
 
-//Entity
+
+//Entities
+
+//DATABASEASTEROID
 @Entity
 data class DatabaseAsteroid constructor(
     @PrimaryKey
@@ -20,6 +24,8 @@ data class DatabaseAsteroid constructor(
     val distance_from_earth: String,
     val status: Boolean
 )
+
+//EXTENSIONS
 
 //An extension function which converts from a database oject ot domain object
 fun List<DatabaseAsteroid>.asDomainModel():List<Asteroid>{

@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation"
-    app:startDestination="@id/mainFragment2">
+    android:label="mainFragment"
+    app:startDestination="@id/mainFragmentDestination">
     <fragment
-        android:id="@+id/mainFragment2"
+        android:id="@+id/mainFragmentDestination"
         android:name="com.example.asteroidscanner.ui.main.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragmentDestination_to_detailFragmentDestination"
+            app:destination="@id/detailFragmentDestination"
+            app:popUpTo="@id/detailFragmentDestination" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragmentDestination"
+        android:name="com.example.asteroidscanner.ui.detail.DetailFragment"
+        android:label="DetailFragment" >
+        <action
+            android:id="@+id/action_detailFragmentDestination_to_mainFragmentDestination"
+            app:destination="@id/mainFragmentDestination"
+            app:popUpTo="@id/navigation" />
+    </fragment>
 </navigation>

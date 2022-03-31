@@ -11,10 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asteroidscanner.R
 import com.example.asteroidscanner.databinding.FragmentMainBinding
+import com.example.asteroidscanner.shared.Utils
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
+import java.net.URI
 
 class MainFragment:Fragment() {
 
@@ -45,10 +50,17 @@ class MainFragment:Fragment() {
         var viewModel = ViewModelProvider(this,viewModelFactory).get(MainViewModel::class.java)
 
         //setup adapter
-        var adapter = MainAdapter()
+        var adapter = MainAdapter(MainAdapter.OnClickListener{
+            viewModel.displayAsteroidDetails(it)
+        })
         var recyclerView: RecyclerView = binding.mainRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
+
+
+
+
+
 
 
         //Observers
@@ -59,6 +71,23 @@ class MainFragment:Fragment() {
                 adapter.submitList(it)
             }
 
+        })
+
+        viewModel.dailyImage.observe(viewLifecycleOwner,Observer{
+
+            Utils.loadImage(
+                this.context,
+                it.url,
+                binding.imageOfTheDay,
+                binding.progressBar)
+
+        })
+
+        viewModel.navigateToSelectedAsteroid.observe(viewLifecycleOwner,Observer{
+            if(null !=it){
+                this.findNavController().navigate(MainFragmentDirections.actionMainFragmentDestinationToDetailFragmentDestination())
+                viewModel.displayAsteroidDetailsComplete()
+            }
         })
 
 

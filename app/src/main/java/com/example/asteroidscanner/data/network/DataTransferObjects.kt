@@ -2,12 +2,18 @@ package com.example.asteroidscanner.data.network
 
 
 import com.example.asteroidscanner.data.database.DatabaseAsteroid
+
+import com.example.asteroidscanner.data.network.responseclasses.GetAsteroidResponse
+import com.example.asteroidscanner.data.network.responseclasses.GetImageResponse
+import com.example.asteroidscanner.data.network.responseclasses.ImageContainer
 import com.example.asteroidscanner.domain.Asteroid
+import com.example.asteroidscanner.domain.DailyImage
+import com.example.asteroidscanner.shared.Utils
 
 
 // DomainModel and DatabaseModels mapping functions
 fun GetAsteroidResponse.asDomainModel():List<Asteroid>{
-    return nearEarthObjects.x20220327.map{
+    return nearEarthObjects[Utils.getCurrentDate()]!!.map{
         Asteroid(
             id = it.id,
             name = it.name,
@@ -23,7 +29,7 @@ fun GetAsteroidResponse.asDomainModel():List<Asteroid>{
 }
 
 fun GetAsteroidResponse.asDataBaseModel():Array<DatabaseAsteroid>{
-    return nearEarthObjects.x20220327.map{
+    return nearEarthObjects[Utils.getCurrentDate()]!!.map{
         DatabaseAsteroid(
             id = it.id,
             name = it.name,
@@ -37,4 +43,6 @@ fun GetAsteroidResponse.asDataBaseModel():Array<DatabaseAsteroid>{
         )
     }.toTypedArray()
 }
+
+
 
