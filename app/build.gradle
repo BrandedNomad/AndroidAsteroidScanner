@@ -1,9 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'androidx.navigation.safeargs'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.asteroidscanner"
-        minSdk 20
+        minSdk 21
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -57,6 +57,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment:2.4.1"
     implementation "androidx.navigation:navigation-runtime-ktx:2.4.1"
     implementation "androidx.navigation:navigation-ui:2.4.1"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:2.4.1"
     //implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
 
     //Room and Lifecycle

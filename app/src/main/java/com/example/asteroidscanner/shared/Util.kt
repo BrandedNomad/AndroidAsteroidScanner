@@ -7,6 +7,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import com.example.asteroidscanner.R
+import com.example.asteroidscanner.data.network.responseclasses.GetImageResponse
+import com.example.asteroidscanner.databinding.FragmentDetailBinding
+import com.example.asteroidscanner.databinding.FragmentMainBinding
+import com.example.asteroidscanner.domain.Asteroid
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
@@ -24,16 +28,17 @@ class Utils {
 
         }
 
-        fun loadImage(context: Context?, imageURL:String, imageView: ImageView, progressBar: ProgressBar){
+        fun loadImage(context: Context?, binding: FragmentMainBinding, image: GetImageResponse){
             println("From PIcaSSo")
             Picasso
                 .with(context)
-                .load(imageURL)
+                .load(image.url)
                 .placeholder(R.drawable.placeholder_picture_of_day)
-                .into(imageView, object: Callback {
+                .into(binding.imageOfTheDay, object: Callback {
                     override fun onSuccess() {
-                        imageView.visibility = View.VISIBLE
-                        progressBar.visibility = View.GONE
+                        binding.imageOfTheDay.visibility = View.VISIBLE
+                        binding.imageOfTheDay.contentDescription = image.title
+                        binding.progressBar.visibility = View.GONE
                     }
 
                     override fun onError() {
@@ -41,6 +46,29 @@ class Utils {
                     }
 
                 })
+        }
+
+        fun bindAsteroidDetails(binding: FragmentDetailBinding, asteroid: Asteroid){
+            if(asteroid.status){
+                binding.statusImage.setImageResource(R.drawable.asteroid_hazardous)
+            }else{
+                binding.statusImage.setImageResource(R.drawable.asteroid_safe)
+            }
+
+            val absoluteMagnitudeString = asteroid.absolute_magnitude.toString() + " au"
+            val estimatedDiameterString = asteroid.estimated_diameter.toString() + " km"
+            val distanceFromEarthString = asteroid.distance_from_earth.toString() + " au"
+            val relativeVelocityString = asteroid.relative_velocity.toString() + " km/s"
+
+
+            binding.statusImage.visibility = View.VISIBLE
+            binding.statusProgressBar.visibility = View.GONE
+            binding.infoAbsoluteMagnitude.text = absoluteMagnitudeString
+            binding.infoCloseApproach.text = asteroid.close_approach_date.toString()
+            binding.infoDistanceFromEarth.text = distanceFromEarthString
+            binding.infoEstimatedDiameter.text = estimatedDiameterString
+            binding.infoRelativeVelocity.text = relativeVelocityString
+
         }
     }
 

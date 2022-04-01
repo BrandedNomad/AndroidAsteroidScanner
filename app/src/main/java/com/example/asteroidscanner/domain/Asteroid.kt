@@ -1,7 +1,10 @@
 package com.example.asteroidscanner.domain
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
 
+@Parcelize
 data class Asteroid(
     val id:String,
     val name:String,
@@ -12,5 +15,5 @@ data class Asteroid(
     val relative_velocity: String,
     val distance_from_earth: String,
     val status: Boolean
-)
+) : Parcelable
 

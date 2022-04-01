@@ -17,6 +17,10 @@
         android:id="@+id/detailFragmentDestination"
         android:name="com.example.asteroidscanner.ui.detail.DetailFragment"
         android:label="DetailFragment" >
+        <argument
+            android:name="selectedAsteroid"
+            app:argType="com.example.asteroidscanner.domain.Asteroid"
+            />
         <action
             android:id="@+id/action_detailFragmentDestination_to_mainFragmentDestination"
             app:destination="@id/mainFragmentDestination"

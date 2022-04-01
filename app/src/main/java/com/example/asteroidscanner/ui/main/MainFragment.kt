@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.asteroidscanner.R
 import com.example.asteroidscanner.databinding.FragmentMainBinding
+import com.example.asteroidscanner.domain.Asteroid
 import com.example.asteroidscanner.shared.Utils
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -63,8 +65,9 @@ class MainFragment:Fragment() {
 
 
 
-        //Observers
-        //Populates the initial
+        //OBSERVERS
+
+        //Populates the initial list
         viewModel.asteroidList.observe(viewLifecycleOwner, Observer{
             //SetAdapter
             it?.let{
@@ -73,19 +76,20 @@ class MainFragment:Fragment() {
 
         })
 
+        //Loads the Image of the Day
         viewModel.dailyImage.observe(viewLifecycleOwner,Observer{
 
             Utils.loadImage(
                 this.context,
-                it.url,
-                binding.imageOfTheDay,
-                binding.progressBar)
+                binding,
+                it)
 
         })
 
+        //Navigates to detail screen when item is selected
         viewModel.navigateToSelectedAsteroid.observe(viewLifecycleOwner,Observer{
             if(null !=it){
-                this.findNavController().navigate(MainFragmentDirections.actionMainFragmentDestinationToDetailFragmentDestination())
+                this.findNavController().navigate(MainFragmentDirections.actionMainFragmentDestinationToDetailFragmentDestination(it))
                 viewModel.displayAsteroidDetailsComplete()
             }
         })
