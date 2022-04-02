@@ -54,18 +54,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="08-02-2020"/>
-            <TextView
-                style="@style/detailTitle"
-                android:id="@+id/titleAbsoluteMagnitude"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Absolute Magnitude"/>
-            <TextView
-                style="@style/detailInfo"
-                android:id="@+id/infoAbsoluteMagnitude"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="08-02-2020"/>
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="start"
+                    android:layout_weight="1">
+                    <TextView
+                        style="@style/detailTitle"
+                        android:id="@+id/titleAbsoluteMagnitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Absolute Magnitude"/>
+                    <TextView
+                        style="@style/detailInfo"
+                        android:id="@+id/infoAbsoluteMagnitude"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="08-02-2020"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <ImageView
+                    android:id="@+id/helpButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_help_circle"
+                    android:layout_gravity="end"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
             <TextView
                 style="@style/detailTitle"
                 android:id="@+id/titleEstimatedDiameter"

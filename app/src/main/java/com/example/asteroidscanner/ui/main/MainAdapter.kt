@@ -18,6 +18,7 @@ class MainAdapter(val onClickListener: OnClickListener): ListAdapter<Asteroid, M
 
     //Create the viewHolder class
     class MainViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+
         val textViewName: TextView = itemView.findViewById(R.id.mainListItemName)
         val textViewDate: TextView = itemView.findViewById(R.id.mainListItemDate)
         val imageViewIcon: ImageView = itemView.findViewById(R.id.mainListItemImage)

@@ -1,5 +1,7 @@
 package com.example.asteroidscanner.ui.detail
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +44,25 @@ class DetailFragment: Fragment() {
         viewModel.selectedAsteroid.observe(viewLifecycleOwner, Observer{
             Utils.bindAsteroidDetails(binding,it)
         })
+
+        val showInfo = binding.helpButton
+        showInfo.setOnClickListener{
+            var infoDialog = AlertDialog.Builder(this.context)
+            var msg = "The astronomical unit (au) is a unit of length, roughly the distance from Earth to the Sun and equal to about 150 million kilometers (93 million miles)"
+
+            infoDialog
+                .setMessage(msg)
+                .setIcon(R.drawable.ic_help_circle)
+                .setCancelable(false)
+                .setPositiveButton(
+                    "OK",
+                    DialogInterface.OnClickListener{dialogInterface, which  ->
+                        dialogInterface.cancel()
+                    }
+                )
+
+            infoDialog.create().show()
+        }
 
         return binding.root
 
