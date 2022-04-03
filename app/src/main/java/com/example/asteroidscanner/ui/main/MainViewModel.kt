@@ -39,7 +39,6 @@ class MainViewModel(application: Application): ViewModel() {
         viewModelScope.launch(Dispatchers.Main + coroutineExceptionHandler){
             asteroidRepository.refreshAsteroids(Utils.getCurrentDate())
             _dailyImage.value = asteroidRepository.getDailyImage()
-
         }
     }
 

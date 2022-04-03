@@ -40,6 +40,16 @@ class AsteroidRepository(private val database:AsteroidDatabase){
 
     }
 
+    suspend fun removeOld(currentDate:String){
+        withContext(Dispatchers.IO){
+            try{
+                database.asteroidDao.removeOld(currentDate)
+            }catch(exception:Exception){
+                Log.e("Repository","Failed to remove old asteroids")
+            }
+        }
+    }
+
     //TODO: Add date variables to replace hardcoded dates
     suspend fun refreshAsteroids(currentDate:String){
         withContext(Dispatchers.IO){
