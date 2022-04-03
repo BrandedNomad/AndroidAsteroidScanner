@@ -12,6 +12,7 @@ import com.example.asteroidscanner.databinding.FragmentDetailBinding
 import com.example.asteroidscanner.databinding.FragmentMainBinding
 import com.example.asteroidscanner.domain.Asteroid
 import com.squareup.picasso.Callback
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,23 +30,37 @@ class Utils {
         }
 
         fun loadImage(context: Context?, binding: FragmentMainBinding, image: GetImageResponse){
-            println("From PIcaSSo")
-            Picasso
-                .with(context)
-                .load(image.url)
-                .placeholder(R.drawable.placeholder_picture_of_day)
-                .into(binding.imageOfTheDay, object: Callback {
-                    override fun onSuccess() {
-                        binding.imageOfTheDay.visibility = View.VISIBLE
-                        binding.imageOfTheDay.contentDescription = image.title
-                        binding.progressBar.visibility = View.GONE
-                    }
 
-                    override fun onError() {
-                        Log.e("error","Image not loading")
-                    }
+            if(image.mediaType == "image"){
+                Picasso
+                    .with(context)
+                    .load(image.url)
+                    .into(binding.imageOfTheDay, object: Callback{
 
-                })
+                        override fun onSuccess() {
+                            binding.imageOfTheDay.visibility = View.VISIBLE
+                            binding.imageOfTheDayTitle.text = "Image Of The Day"
+                            binding.imageOfTheDay.contentDescription = image.title
+                            binding.progressBar.visibility = View.GONE
+                        }
+
+                        override fun onError() {
+                            Log.e("error", "Image not loading")
+                            binding.imageOfTheDay.setImageResource(R.drawable.placeholder_picture_of_day)
+                            binding.imageOfTheDayTitle.setText("No Internet Connection".toString())
+                            binding.imageOfTheDay.visibility = View.VISIBLE
+                            binding.progressBar.visibility = View.GONE
+                        }
+                    })
+            }else if(image.mediaType == "video"){
+                binding.imageOfTheDay.setImageResource(R.drawable.placeholder_picture_of_day)
+                binding.imageOfTheDayTitle.setText("No Image Today".toString())
+                binding.imageOfTheDay.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
+            }
+
+
+
         }
 
         fun bindAsteroidDetails(binding: FragmentDetailBinding, asteroid: Asteroid){

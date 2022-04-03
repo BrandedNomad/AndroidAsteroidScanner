@@ -3,11 +3,14 @@ package com.example.asteroidscanner.data.database
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.asteroidscanner.shared.Utils
+
 
 @Dao
 interface AsteroidDao {
-    @Query("select * from databaseasteroid")
-    fun getAsteroids(): LiveData<List<DatabaseAsteroid>>
+
+    @Query("select * from databaseasteroid WHERE date >= :currentDate ORDER BY date ")
+    fun getAsteroids(currentDate:String): LiveData<List<DatabaseAsteroid>>
 
     @Insert(onConflict= OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg asteroids:DatabaseAsteroid)

@@ -1,8 +1,9 @@
-package com.example.asteroidscanner
+package com.example.asteroidscanner.ui.main
 
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.asteroidscanner.R
 
 
 class MainActivity : AppCompatActivity() {

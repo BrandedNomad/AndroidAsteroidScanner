@@ -78,11 +78,14 @@ class MainFragment:Fragment() {
 
         //Loads the Image of the Day
         viewModel.dailyImage.observe(viewLifecycleOwner,Observer{
+            Log.e("MainFragment","The dailyImage has changed")
 
             Utils.loadImage(
                 this.context,
                 binding,
                 it)
+
+
 
         })
 

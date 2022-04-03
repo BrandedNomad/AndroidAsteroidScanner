@@ -14,6 +14,8 @@ import com.example.asteroidscanner.domain.Asteroid
 import com.example.asteroidscanner.domain.DailyImage
 import com.example.asteroidscanner.shared.Constants
 import com.example.asteroidscanner.shared.Utils
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.await
 
@@ -30,19 +32,13 @@ class MainViewModel(application: Application): ViewModel() {
 
     init{
 
-        viewModelScope.launch{
+        val coroutineExceptionHandler = CoroutineExceptionHandler{_, throwable ->
+            throwable.printStackTrace()
+        }
+
+        viewModelScope.launch(Dispatchers.Main + coroutineExceptionHandler){
             asteroidRepository.refreshAsteroids(Utils.getCurrentDate())
-            var responseImage = Network.imageOfTheDayAPI.getImageOfTheDay(Constants.API_KEY).await()
-            if(responseImage.mediaType == "image"){
-                _dailyImage.value = responseImage
-            }else{
-                _dailyImage.value = GetImageResponse(
-                    title = "Default",
-                    url = "https://apod.nasa.gov/apod/image/2001/STSCI-H-p2006a-h-1024x614.jpg",
-                    mediaType = "image"
-                )
-            }
-            
+            _dailyImage.value = asteroidRepository.getDailyImage()
 
         }
     }
