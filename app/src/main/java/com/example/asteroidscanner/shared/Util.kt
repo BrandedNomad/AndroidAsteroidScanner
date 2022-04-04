@@ -40,7 +40,7 @@ class Utils {
                         override fun onSuccess() {
                             binding.imageOfTheDay.visibility = View.VISIBLE
                             binding.imageOfTheDayTitle.text = "Image Of The Day"
-                            binding.imageOfTheDay.contentDescription = image.title
+                            binding.imageOfTheDay.contentDescription = "Today's image of the day is :" + image.title.toString()
                             binding.progressBar.visibility = View.GONE
                         }
 
@@ -48,6 +48,7 @@ class Utils {
                             Log.e("error", "Image not loading")
                             binding.imageOfTheDay.setImageResource(R.drawable.placeholder_picture_of_day)
                             binding.imageOfTheDayTitle.setText("No Internet Connection".toString())
+                            binding.imageOfTheDay.contentDescription = "No Image downloaded. Connect to the internet to download image of the day"
                             binding.imageOfTheDay.visibility = View.VISIBLE
                             binding.progressBar.visibility = View.GONE
                         }
@@ -55,6 +56,7 @@ class Utils {
             }else if(image.mediaType == "video"){
                 binding.imageOfTheDay.setImageResource(R.drawable.placeholder_picture_of_day)
                 binding.imageOfTheDayTitle.setText("No Image Today".toString())
+                binding.imageOfTheDay.contentDescription = "Image of the day is not available today. Try again tomorrow"
                 binding.imageOfTheDay.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.GONE
             }
@@ -66,8 +68,10 @@ class Utils {
         fun bindAsteroidDetails(binding: FragmentDetailBinding, asteroid: Asteroid){
             if(asteroid.status){
                 binding.statusImage.setImageResource(R.drawable.asteroid_hazardous)
+                binding.statusImage.contentDescription = "This asteroid is potentially hazardous"
             }else{
                 binding.statusImage.setImageResource(R.drawable.asteroid_safe)
+                binding.statusImage.contentDescription = "This asteroid is safe"
             }
 
             val absoluteMagnitudeString = asteroid.absolute_magnitude.toString() + " au"

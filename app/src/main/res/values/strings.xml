@@ -1,4 +1,10 @@
 <resources>
-    <string name="app_name">AsteroidScanner</string>
+    <string name="app_name">Asteroid Scanner</string>
     <string name="imageOfTheDayTitle">Image Of The Day</string>
+    <string name="close_approach_date">Close Approach Date</string>
+    <string name="absolute_magnitude">Absolute Magnitude</string>
+    <string name="content_description_astronomical_unit">Click this button for a definition of astronomical unit</string>
+    <string name="content_description_google_add">A google add. Click to view add</string>
+    <string name="text_loading">...</string>
+    <string name="content_description_loading_image">Image still loading</string>
 </resources>

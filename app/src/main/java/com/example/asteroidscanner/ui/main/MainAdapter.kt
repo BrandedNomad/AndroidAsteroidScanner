@@ -31,13 +31,17 @@ class MainAdapter(val onClickListener: OnClickListener): ListAdapter<Asteroid, M
             holder.textViewDate.text = item?.date
             holder.imageViewIcon.setImageResource(
                 when(item?.status){
-                    false -> R.drawable.ic_status_normal
+                    false -> {
+                        R.drawable.ic_status_normal
+                    }
                     true -> R.drawable.ic_status_potentially_hazardous
                     else -> {
                         R.drawable.ic_status_normal
                     }
                 }
             )
+
+            holder.imageViewIcon.contentDescription = (if(item?.status == true) "This asteroid is potentially hazardous" else  "This asteroid is safe").toString()
         }
 
         companion object {

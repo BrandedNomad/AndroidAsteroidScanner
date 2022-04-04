@@ -31,111 +31,130 @@
                 android:visibility="visible"/>
 
         </FrameLayout>
+
         <LinearLayout
             android:id="@+id/detailListView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@color/black"
             android:orientation="vertical"
+            android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statusImageContainer"
-            android:padding="16dp"
-            android:background="@color/black">
+            app:layout_constraintVertical_bias="1.0">
+
             <TextView
-                style="@style/detailTitle"
                 android:id="@+id/titleCloseApproach"
+                style="@style/detailTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Close Approach Date"/>
+                android:text="@string/close_approach_date" />
+
             <TextView
-                style="@style/detailInfo"
                 android:id="@+id/infoCloseApproach"
+                style="@style/detailInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="08-02-2020"/>
+                android:text="@string/text_loading" />
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_gravity="start"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
                     <TextView
-                        style="@style/detailTitle"
                         android:id="@+id/titleAbsoluteMagnitude"
+                        style="@style/detailTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Absolute Magnitude"/>
+                        android:text="@string/absolute_magnitude" />
+
                     <TextView
-                        style="@style/detailInfo"
                         android:id="@+id/infoAbsoluteMagnitude"
+                        style="@style/detailInfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="08-02-2020"/>
+                        android:text="@string/text_loading" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
                 <ImageView
                     android:id="@+id/helpButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_help_circle"
-                    android:layout_gravity="end"/>
+                    android:contentDescription="@string/content_description_astronomical_unit"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_help_circle" />
             </androidx.appcompat.widget.LinearLayoutCompat>
+
             <TextView
-                style="@style/detailTitle"
                 android:id="@+id/titleEstimatedDiameter"
+                style="@style/detailTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Estimated Diameter"/>
+                android:text="Estimated Diameter" />
+
             <TextView
-                style="@style/detailInfo"
                 android:id="@+id/infoEstimatedDiameter"
+                style="@style/detailInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="08-02-2020"/>
+                android:text="@string/text_loading" />
+
             <TextView
-                style="@style/detailTitle"
                 android:id="@+id/titleRelativeVelocity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Relative Velocity"/>
-            <TextView
-                style="@style/detailInfo"
-                android:id="@+id/infoRelativeVelocity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="08-02-2020"/>
-            <TextView
                 style="@style/detailTitle"
-                android:id="@+id/titleDistanceFromEarth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Distance From Earth"/>
+                android:text="Relative Velocity" />
+
             <TextView
+                android:id="@+id/infoRelativeVelocity"
                 style="@style/detailInfo"
-                android:id="@+id/infoDistanceFromEarth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="08-02-2020"/>
+                android:text="@string/text_loading" />
 
+            <TextView
+                android:id="@+id/titleDistanceFromEarth"
+                style="@style/detailTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Distance From Earth" />
 
+            <TextView
+                android:id="@+id/infoDistanceFromEarth"
+                style="@style/detailInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_loading" />
 
 
         </LinearLayout>
 
-        <ProgressBar
-            android:id="@+id/statusLoadingWheel"
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/content_description_google_add"
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-3940256099942544/6300978111"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

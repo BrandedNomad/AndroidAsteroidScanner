@@ -1,6 +1,7 @@
 package com.example.asteroidscanner
 
 import android.app.Application
+import android.content.Context
 import android.os.Build
 import androidx.work.*
 
@@ -39,7 +40,7 @@ class AsteroidScannerApplication: Application() {
             .setConstraints(constraints)
             .build()
 
-        WorkManager.getInstance().enqueueUniquePeriodicWork(
+        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
             RefreshDataWorker.WORK_NAME,
             ExistingPeriodicWorkPolicy.KEEP,
             repeatingRequest

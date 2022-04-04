@@ -16,6 +16,7 @@ import com.example.asteroidscanner.R
 import com.example.asteroidscanner.databinding.FragmentDetailBinding
 import com.example.asteroidscanner.databinding.FragmentMainBinding
 import com.example.asteroidscanner.shared.Utils
+import com.google.android.gms.ads.AdRequest
 
 class DetailFragment: Fragment() {
 
@@ -63,6 +64,10 @@ class DetailFragment: Fragment() {
 
             infoDialog.create().show()
         }
+
+        var mAdView = binding.adView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         return binding.root
 
